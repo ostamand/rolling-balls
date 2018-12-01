@@ -143,3 +143,5 @@ venv.bak/
 data/
 
 Assets/ML-Agents
+
+Training/.vscode
