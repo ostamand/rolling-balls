@@ -21,9 +21,7 @@ class Agent():
         restore
     """
     def __init__(self, env, policy,
-                 nsteps=200, epochs=10, nbatchs=32,
-                 ratio_clip=0.2, lrate=1e-3, lrate_schedule=lambda it: 1.0, beta=0.01,
-                 gae_tau=0.95, gamma=0.99, weight_decay=0.0, gradient_clip=0.5, restore=None):
+                 nsteps=200, epochs=10, nbatchs=32, gae_tau=0.95, gamma=0.99):
         self.env = env
         self.p = policy
         # create session from policy graph
@@ -34,14 +32,7 @@ class Agent():
         self.gamma = gamma
         self.epochs = epochs
         self.nbatchs = nbatchs
-        self.ratio_clip = ratio_clip
-        self.lrate = lrate
-        self.gradient_clip = gradient_clip
-        self.beta = beta
         self.gae_tau = gae_tau
-        self.restore = restore
-        self.lrate_schedule = lrate_schedule
-        self.weight_decay = weight_decay
 
         self.state = self.env.reset()
 
@@ -105,7 +96,6 @@ class Agent():
 
             R = rewards + self.gamma * R * dones
             # without gae, advantage is calculated as:
-            #advs = R[:,None] - values[:,None]
             td_errors = rewards + self.gamma * dones * next_values - values
             advs = advs * self.gae_tau * self.gamma * dones + td_errors
             # with gae

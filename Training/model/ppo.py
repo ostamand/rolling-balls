@@ -57,13 +57,12 @@ class Policy:
 
                 self.actor_loss = -tf.reduce_mean(self.clipped_surrogate) - self.beta * tf.reduce_mean(self.entropy)
                 self.critic_loss = tf.losses.huber_loss(self.vf, self.rtrn)
+                tf.summary.scalar('actor_loss', self.actor_loss)
+                tf.summary.scalar('critic_loss', self.critic_loss)
 
                 self.loss = self.actor_loss + self.critic_loss
 
                 optimizer = tf.train.AdamOptimizer(learning_rate = self.lrate)
-
-                #a_vars = [var for var in tf.trainable_variables() if not var.name.startswith('critic')]
-                #c_vars = [var for var in tf.trainable_variables() if not var.name.startswith('actor')]
 
                 # calculate gradients and clip by norm
                 gradients = optimizer.compute_gradients(self.loss)
@@ -71,7 +70,7 @@ class Policy:
                 self.train_op = optimizer.apply_gradients(capped_gradients)
 
             self.init = tf.global_variables_initializer()
-                
+            self.summaries = tf.summary.merge_all()    
 
             
 
