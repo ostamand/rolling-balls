@@ -9,7 +9,7 @@ if __name__ == '__main__':
 
     iterations = 10000
     gamma = 0.99
-    nsteps = 2048
+    nsteps = 1024
     ratio_clip = 0.2
     nbatchs = 32
     epochs = 10
@@ -22,7 +22,7 @@ if __name__ == '__main__':
     out_file = 'test.ckpt'
 
     # environment 
-    env = RollingBallEnv()
+    env = RollingBallEnv(filename='data/RollingBall_v2/RollingBall_v2.exe')
 
     # policy
     policy = Policy(env.state_size, env.action_size,

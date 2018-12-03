@@ -67,7 +67,7 @@ class Agent():
     def step(self):
         trajectory_raw = []
         for _ in range(self.nsteps):
-            inference_dict = {self.p.state: self.state.reshape(-1, self.state_size), self.p.batch_size: 1}
+            inference_dict = {self.p.state: self.state.reshape(-1, self.state_size)}
             action, log_p, value = self.sess.run([self.p.action, self.p.log_prob, self.p.vf], feed_dict=inference_dict)
             next_state, reward, done = self.env.step(action)
             self.rewards += reward
@@ -78,10 +78,10 @@ class Agent():
                     self.episodes_reward.append(self.rewards[i])
                     self.rewards[i] = 0
 
-            trajectory_raw.append((self.state, action.squeeze(), reward, log_p.squeeze(), value.squeeze(), 1-done))
+            trajectory_raw.append((self.state, action, reward, log_p, value, 1-done))
             self.state = next_state
 
-        next_value = self.sess.run([self.p.vf], feed_dict={self.p.state: self.state.reshape(-1, self.state_size), self.p.batch_size: 1 })[-1]
+        next_value = self.sess.run([self.p.vf], feed_dict={self.p.state: self.state.reshape(-1, self.state_size) })[-1]
         trajectory_raw.append((self.state, None, None, None, next_value, None))
         trajectory = [None] * (len(trajectory_raw)-1)
         # process raw trajectories
@@ -94,14 +94,14 @@ class Agent():
             states, actions, rewards, log_probs, values, dones = trajectory_raw[i]
             next_values = trajectory_raw[i+1][-2]
 
-            R = rewards + self.gamma * R * dones
+            R = rewards[:,None] + self.gamma * R * dones[:,None]
             # without gae, advantage is calculated as:
-            td_errors = rewards + self.gamma * dones * next_values - values
-            advs = advs * self.gae_tau * self.gamma * dones + td_errors
+            td_errors = rewards[:,None] + self.gamma * dones[:,None] * next_values - values
+            advs = advs * self.gae_tau * self.gamma * dones[:,None] + td_errors
             # with gae
-            trajectory[i] = (states, actions, log_probs, R.squeeze(), advs.squeeze())
+            trajectory[i] = (states, actions, log_probs, R.squeeze(1), advs.squeeze(1))
 
-        states, actions, old_log_probs, returns, advs = map(lambda x: np.stack((x), axis=0), zip(*trajectory))
+        states, actions, old_log_probs, returns, advs = map(lambda x: np.concatenate(x, axis=0), zip(*trajectory))
 
         # normalize advantages
         advs = (advs - advs.mean())  / (advs.std() + 1.0e-10)
@@ -119,6 +119,7 @@ class Agent():
                           self.p.rtrn: returns_b[:,None]
                          }
                 a_loss, c_loss, _ = self.sess.run([self.p.actor_loss, self.p.critic_loss, self.p.train_op], feed_dict=f_dict)
+                #self.sess.run([self.p.clip], feed_dict=f_dict)
 
         # steps of the environement processed by the agent 
         self.steps += self.nsteps * self.num_agents

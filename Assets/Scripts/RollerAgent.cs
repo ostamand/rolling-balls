@@ -8,6 +8,7 @@ public class RollerAgent : Agent
 
     Rigidbody rBody;
     public Transform Target;
+    public Transform Origin;
     public float speed = 10;
     private float previousDistance = float.MaxValue;
 
@@ -21,16 +22,16 @@ public class RollerAgent : Agent
         if (this.transform.position.y < -1.0)
         {
             // the Agent fell
-            this.transform.position = Vector3.zero;
+            this.transform.position = new Vector3(Origin.position.x, 0, Origin.position.z);
             this.rBody.angularVelocity = Vector3.zero;
             this.rBody.velocity = Vector3.zero;
         }
         else
         {
             // move the target to a new spot
-            Target.position = new Vector3(Random.value * 8 - 4,
+            Target.position = new Vector3(Random.value * 8 - 4 + Origin.position.x,
                                           0.5f,
-                                          Random.value * 8 - 4);
+                                          Random.value * 8 - 4 + Origin.position.z);
         }
     }
 
@@ -43,10 +44,10 @@ public class RollerAgent : Agent
         AddVectorObs(relativePosition.z / 5);
 
         // distance to edge of platform 
-        AddVectorObs((this.transform.position.x + 5) / 5);
-        AddVectorObs((this.transform.position.x - 5) / 5);
-        AddVectorObs((this.transform.position.z + 5) / 5);
-        AddVectorObs((this.transform.position.z - 5) / 5);
+        AddVectorObs((this.transform.position.x - Origin.position.x + 5 ) / 5);
+        AddVectorObs((this.transform.position.x - Origin.position.x - 5) / 5);
+        AddVectorObs((this.transform.position.z - Origin.position.z + 5) / 5);
+        AddVectorObs((this.transform.position.z - Origin.position.z - 5) / 5);
 
         // velocity
         AddVectorObs(rBody.velocity.x / 5);

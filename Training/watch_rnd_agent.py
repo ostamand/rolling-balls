@@ -1,7 +1,7 @@
 from rolling_ball_env import RollingBallEnv
 
 def watch():
-    env = RollingBallEnv(no_graphics=False)
+    env = RollingBallEnv(filename='data/RollingBall_v2/RollingBall_v2.exe', no_graphics=False)
     env.reset(train=False)
     score = 0
     for step_i in range(200):
