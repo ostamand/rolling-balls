@@ -69,7 +69,8 @@ class Policy:
                 capped_gradients = [(tf.clip_by_norm(grad, self.g_clip), var) for grad, var in gradients]
                 self.train_op = optimizer.apply_gradients(capped_gradients)
 
-            self.init = tf.global_variables_initializer()
+            self.init = tf.global_variables_initializer() # init op
+            self.saver = tf.train.Saver() # save op
             self.summaries = tf.summary.merge_all()    
 
             

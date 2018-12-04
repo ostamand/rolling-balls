@@ -64,6 +64,9 @@ class Agent():
                 states[rge], actions[rge], old_log_probs[rge], returns[rge], advs[rge]
                 )
 
+    def save(self, filename):
+        self.p.saver.save(self.sess, filename)
+        
     def step(self):
         trajectory_raw = []
         for _ in range(self.nsteps):

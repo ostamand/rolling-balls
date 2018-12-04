@@ -5,7 +5,6 @@ using MLAgents;
 
 public class RollerAgent : Agent
 {
-
     Rigidbody rBody;
     public Transform Target;
     public Transform Origin;
@@ -59,21 +58,24 @@ public class RollerAgent : Agent
         // rewards
         float distanceToTarget = Vector3.Distance(this.transform.position,
                                                   Target.position);
-   
+
         // reached target
         if (distanceToTarget < 1.2f)
         {
-            AddReward(1.0f);
+            AddReward(2.0f);
             Done();
         }
 
         // time penalty
         AddReward(-0.05f);
 
+        // distance penality
+        AddReward(distanceToTarget / 11.0f * -0.50f);
+        
         // fell off platform
         if (this.transform.position.y < -1.0)
         {
-            AddReward(-1.0f);
+            AddReward(-10.0f);
             Done();
         }
 

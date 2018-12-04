@@ -120,6 +120,7 @@ MonoBehaviour:
     onDemandDecision: 0
     numberOfActionsBetweenDecisions: 5
   Target: {fileID: 0}
+  Origin: {fileID: 0}
   speed: 10
 --- !u!135 &135911942232630536
 SphereCollider:

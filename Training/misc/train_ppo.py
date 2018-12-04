@@ -1,6 +1,7 @@
 import pickle
 import numpy as np
 import tensorflow as tf 
+import os.path
 
 def train(agent,
           iterations=1000,
@@ -8,9 +9,10 @@ def train(agent,
           solved=90,
           out_file=None):
 
-    # writer session graph of agent
-    
     with agent.sess as sess:
+        # save graph definition
+        tf.train.write_graph(sess.graph.as_graph_def(), os.path.dirname(out_file), 'graph.pb')
+
         writer = tf.summary.FileWriter('logs', sess.graph)
 
         # add score logging
@@ -18,7 +20,7 @@ def train(agent,
         score_summ = tf.summary.scalar('score', score_ph)
 
         rewards = []
-        last_saved = 0
+        last_saved = -np.inf
         for it in range(iterations):
             frac = 1.0 - it / (iterations-1)
             agent.step()
@@ -42,7 +44,7 @@ def train(agent,
 
                     if out_file and mean >= solved and mean > last_saved:
                         last_saved = mean
-                        #agent.save(out_file)
+                        agent.save(out_file) # save checkpoint
                         summary += " (saved)"
 
                 print(f"Iteration: {it+1:d}, Episodes: {len(agent.episodes_reward)}, Steps: {agent.steps:d}{summary}")
