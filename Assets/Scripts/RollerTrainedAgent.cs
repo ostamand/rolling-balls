@@ -21,6 +21,19 @@ public class RollerTrainedAgent : Agent
         _game = FindObjectOfType<GameController>();
     }
 
+    public void SetActive(bool isActive)
+    {
+        MeshRenderer renderer = GetComponent<MeshRenderer>();
+        if(isActive)
+        {
+            renderer.enabled = true;
+        }
+        else
+        {
+            renderer.enabled = false;
+        }
+    }
+
     public override void AgentReset()
     {
         ResetPosition();
@@ -58,13 +71,11 @@ public class RollerTrainedAgent : Agent
         _target.UpdatePosition(this.transform.position, TypeOf.Agent);
        
         // fell off platform
-        // TODO more robust
-        if (this.transform.position.y < -1.0)
+        if(Helper.CheckFellOff(this.transform.position))
         {
             _game.AgentFell();
             ResetPosition();
         }
-
         // actions, size = 2
         Vector3 controlSignal = Vector3.zero;
         controlSignal.x = vectorAction[0];

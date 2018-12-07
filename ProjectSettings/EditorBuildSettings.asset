@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/RollingBall_train.unity
-    guid: 6936c69464001bc46ba4cc741fd47468
+    path: Assets/Scenes/RollingBall_single.unity
+    guid: 56f951ded78c7e84a961e7b44d621b66
+  - enabled: 1
+    path: Assets/Scenes/Level2.unity
+    guid: 8c95ab3d2d1ddd34dae308cc81b44cc3
   m_configObjects: {}

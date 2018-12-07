@@ -4,9 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Assets.Scripts.Common;
+using UnityEngine.SceneManagement;
 
 public class GameController: MonoBehaviour
 {
+    #region Public Fields
+
     public Text playerScoreLabel;
     public Text agentScoreLabel;
     public Text centerLabel;
@@ -14,27 +17,42 @@ public class GameController: MonoBehaviour
     public int pointsPerHit = 1;
     public int pointsPerFell = 1;
 
-    private int playerScore = 0;
-    private int agentScore = 0;
+    #endregion
+
+    #region Private Fields
+
+    private int _playerScore = 0;
+    private int _agentScore = 0;
+    private Player _player;
+    private RollerTrainedAgent _agent;
+
+    #endregion
 
     void Start ()
     {
-        centerLabel.enabled = false;
-	}
+        // start deactivated
+        centerLabel.text = "Level " + (SceneManager.GetActiveScene().buildIndex+1);
+        centerLabel.enabled = true;
+        _player = FindObjectOfType<Player>();
+        _agent = FindObjectOfType<RollerTrainedAgent>();
+        _player.SetActive(false);
+        _agent.SetActive(false);
+        Invoke("Activate", 1f);
+    }
 	
 	void Update ()
     {
-		
+        ProcessInput();
 	}
 
     #region Public Methods 
 
     public void AddToScore(int score, TypeOf update)
     {
-        if (update == TypeOf.Player) { playerScore++; }
-        if (update == TypeOf.Agent) { agentScore++; }
-        playerScoreLabel.text = playerScore.ToString();
-        agentScoreLabel.text = agentScore.ToString();
+        if (update == TypeOf.Player) { _playerScore++; }
+        if (update == TypeOf.Agent) { _agentScore++; }
+        playerScoreLabel.text = _playerScore.ToString();
+        agentScoreLabel.text = _agentScore.ToString();
 
         CheckScore();
     }
@@ -58,17 +76,60 @@ public class GameController: MonoBehaviour
 
     #region Private Helpers
 
+    private void Activate()
+    {
+        centerLabel.enabled = false;
+        _player.SetActive(true);
+        _agent.SetActive(true);
+    }
+
+    private void ProcessInput()
+    {
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            LoadNextLevel();
+        }
+    }
+
+    private void LoadNextLevel()
+    {
+        int nextIndex = SceneManager.GetActiveScene().buildIndex + 1;
+        if (nextIndex != SceneManager.sceneCountInBuildSettings)
+        {
+            _playerScore = 0;
+            _agentScore = 0;
+            SceneManager.LoadScene(nextIndex);
+        }
+    }
+
+    private void ReloadCurrentLevel()
+    {
+
+
+
+    }
+
+    private void StartTransition()
+    {
+        // deactive player movements
+        _player.SetActive(false);
+    }
+
     private void CheckScore()
     {
-        if (playerScore == 20)
+        if (_playerScore == 20)
         {
             centerLabel.text = "Win!";
             centerLabel.enabled = true;
+            StartTransition();
+            Invoke("LoadNextLevel", 3f);
         }
-        if(agentScore==20)
+        if(_agentScore==20)
         {
             centerLabel.text = "Loose!";
             centerLabel.enabled = true;
+            StartTransition();
+            Invoke("ReloadCurrentLevel", 3f);
         }
     }
 

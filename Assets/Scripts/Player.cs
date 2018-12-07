@@ -12,6 +12,16 @@ public class Player : MonoBehaviour {
     private Rigidbody _rigidBody;
     private TargetHandler _target;
     private GameController _game;
+    private bool _isActive = true;
+
+    #region Public Methods
+
+    public void SetActive(bool isActive)
+    {
+        _isActive = isActive;
+    }
+
+    #endregion
 
     void Start ()
     {
@@ -28,8 +38,14 @@ public class Player : MonoBehaviour {
 
     private void ProcessPosition()
     {
-        // update positio wrt target
+        // update position wrt target
         _target.UpdatePosition(this.transform.position, TypeOf.Player);
+
+        if(Helper.CheckFellOff(this.transform.position))
+        {
+            _game.PlayerFell();
+            ResetPosition();
+        }
 
         // check if fell off
         // TODO more robust
@@ -49,6 +65,8 @@ public class Player : MonoBehaviour {
 
     private void ProcessInput()
     {
+        if (!_isActive) { return; }
+
         float move_x = 0.0f;
         float move_z = 0.0f;
 
