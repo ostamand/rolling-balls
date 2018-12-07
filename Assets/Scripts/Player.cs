@@ -2,21 +2,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Assets.Scripts.Common;
 
 public class Player : MonoBehaviour {
 
     public float speed = 10;
     public GameObject target;
 
-    private Rigidbody rigidBody;
-    private TargetHandler targetHandler;
-    private Scorer scoreHandler;
+    private Rigidbody _rigidBody;
+    private TargetHandler _target;
+    private GameController _game;
 
     void Start ()
     {
-        rigidBody = GetComponent<Rigidbody>();
-        targetHandler = target.GetComponent<TargetHandler>();
-        scoreHandler = FindObjectOfType<Scorer>();
+        _rigidBody = GetComponent<Rigidbody>();
+        _target = target.GetComponent<TargetHandler>();
+        _game = FindObjectOfType<GameController>();
     }
 	
 	void Update ()
@@ -27,19 +28,14 @@ public class Player : MonoBehaviour {
 
     private void ProcessPosition()
     {
-        float distanceToTarget = Vector3.Distance(this.transform.position,
-                                                  target.transform.position);
-        // reached target
-        if (distanceToTarget < 1.2f)
-        {
-            scoreHandler.PlayerHit();
-            targetHandler.NewPosition();
-        }
+        // update positio wrt target
+        _target.UpdatePosition(this.transform.position, TypeOf.Player);
+
         // check if fell off
         // TODO more robust
         if (this.transform.position.y < -1.0)
         {
-            scoreHandler.PlayerFell();
+            _game.PlayerFell();
             ResetPosition();
         }
     }
@@ -47,8 +43,8 @@ public class Player : MonoBehaviour {
     private void ResetPosition()
     {
         this.transform.position = new Vector3(0, 0, 0);
-        this.rigidBody.angularVelocity = Vector3.zero;
-        this.rigidBody.velocity = Vector3.zero;
+        this._rigidBody.angularVelocity = Vector3.zero;
+        this._rigidBody.velocity = Vector3.zero;
     }
 
     private void ProcessInput()
@@ -61,6 +57,6 @@ public class Player : MonoBehaviour {
         if (Input.GetKey(KeyCode.RightArrow)) { move_x = 1.0f; }
         if (Input.GetKey(KeyCode.LeftArrow)) { move_x = -1.0f; }
 
-        rigidBody.AddForce(new Vector3(move_x, 0, move_z) * speed * Time.deltaTime);
+        _rigidBody.AddForce(new Vector3(move_x, 0, move_z) * speed * Time.deltaTime);
     }
 }

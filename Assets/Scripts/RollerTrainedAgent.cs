@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using MLAgents;
+using Assets.Scripts.Common;
 
 public class RollerTrainedAgent : Agent
 {
@@ -10,27 +11,19 @@ public class RollerTrainedAgent : Agent
     public float speed = 10;
 
     private Rigidbody _rigidBody;
-    private TargetHandler _targetHandler;
-    private Scorer _scoreHandler;
+    private TargetHandler _target;
+    private GameController _game;
 
     void Start()
     {
         _rigidBody = GetComponent<Rigidbody>();
-        _targetHandler = Target.GetComponent<TargetHandler>();
-        _scoreHandler = FindObjectOfType<Scorer>();
+        _target = Target.GetComponent<TargetHandler>();
+        _game = FindObjectOfType<GameController>();
     }
 
     public override void AgentReset()
     {
-        if (this.transform.position.y < -1.0)
-        {
-            // the Agent fell
-            ResetPosition();
-        }
-        else
-        {
-            _targetHandler.NewPosition();
-        }
+        ResetPosition();
     }
 
     private void ResetPosition()
@@ -61,29 +54,14 @@ public class RollerTrainedAgent : Agent
 
     public override void AgentAction(float[] vectorAction, string textAction)
     {
-        // rewards
-        float distanceToTarget = Vector3.Distance(this.transform.position,
-                                                  Target.transform.position);
-
-        // reached target
-        if (distanceToTarget < 1.2f)
-        {
-            AddReward(2.0f);
-            _scoreHandler.AgentHit();
-            _targetHandler.NewPosition();
-        }
-
-        // time penalty
-        AddReward(-0.05f);
-
-        // distance penality
-        AddReward(distanceToTarget / 11.0f * -0.50f);
-
+        // update position wrt target
+        _target.UpdatePosition(this.transform.position, TypeOf.Agent);
+       
         // fell off platform
+        // TODO more robust
         if (this.transform.position.y < -1.0)
         {
-            AddReward(-10.0f);
-            _scoreHandler.AgentFell();
+            _game.AgentFell();
             ResetPosition();
         }
 

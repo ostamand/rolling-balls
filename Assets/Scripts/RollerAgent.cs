@@ -9,7 +9,6 @@ public class RollerAgent : Agent
     public Transform Target;
     public Transform Origin;
     public float speed = 10;
-    private float previousDistance = float.MaxValue;
 
     void Start ()
     {
