@@ -632,6 +632,71 @@ Prefab:
     - {fileID: 6400000, guid: b8c9a25a29cbdf249909205742954ccd, type: 3}
   m_ParentPrefab: {fileID: 100100000, guid: b8c9a25a29cbdf249909205742954ccd, type: 3}
   m_IsPrefabParent: 0
+--- !u!1 &367906880
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 367906881}
+  - component: {fileID: 367906882}
+  m_Layer: 0
+  m_Name: Spot Light (10)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &367906881
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 367906880}
+  m_LocalRotation: {x: 0.44213915, y: -0.5557291, z: 0.28506172, w: 0.6437531}
+  m_LocalPosition: {x: 2.121, y: 2.727, z: 0.03}
+  m_LocalScale: {x: 0.3405127, y: 0.4438018, z: 0.38235277}
+  m_Children: []
+  m_Father: {fileID: 2086434224}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 62.386, y: -91.06901, z: -15.568001}
+--- !u!108 &367906882
+Light:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 367906880}
+  m_Enabled: 1
+  serializedVersion: 8
+  m_Type: 0
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 1.5
+  m_Range: 30
+  m_SpotAngle: 15
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 0
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_Lightmapping: 4
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 1
+  m_ColorTemperature: 6570
+  m_UseColorTemperature: 0
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
 --- !u!1001 &420006317
 Prefab:
   m_ObjectHideFlags: 0
@@ -1924,7 +1989,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1573726138
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2615,6 +2680,11 @@ Transform:
 --- !u!1 &2086434218 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1848676135876648, guid: 256733d0daf9f734bb9a3de6dca23f1d,
+    type: 2}
+  m_PrefabInternal: {fileID: 566766086}
+--- !u!4 &2086434224 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4961463518915532, guid: 256733d0daf9f734bb9a3de6dca23f1d,
     type: 2}
   m_PrefabInternal: {fileID: 566766086}
 --- !u!1001 &2137534211
