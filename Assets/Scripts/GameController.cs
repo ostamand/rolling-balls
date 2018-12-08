@@ -25,19 +25,35 @@ public class GameController: MonoBehaviour
     private int _agentScore = 0;
     private Player _player;
     private RollerTrainedAgent _agent;
+    private bool _isSplash;
 
     #endregion
 
     void Start ()
     {
         // start deactivated
-        centerLabel.text = "Level " + (SceneManager.GetActiveScene().buildIndex+1);
-        centerLabel.enabled = true;
-        _player = FindObjectOfType<Player>();
+        int sceneIndex = SceneManager.GetActiveScene().buildIndex;
+        if (sceneIndex == 0) { _isSplash = true; }
+
         _agent = FindObjectOfType<RollerTrainedAgent>();
-        _player.SetActive(false);
         _agent.SetActive(false);
-        Invoke("Activate", 1f);
+
+        if (!_isSplash)
+        {
+            centerLabel.text = "Level " + (SceneManager.GetActiveScene().buildIndex);
+            _player = FindObjectOfType<Player>();
+            _player.SetActive(false);
+            Invoke("Activate", 1f);
+        }
+        else
+        {
+            centerLabel.text = "Rolling Balls of Christmas";
+            playerScoreLabel.enabled = false;
+            agentScoreLabel.enabled = false;
+            _agent.SetActive(true);
+        }
+        
+        centerLabel.enabled = true;
     }
 	
 	void Update ()
@@ -72,6 +88,12 @@ public class GameController: MonoBehaviour
         AddToScore(pointsPerFell, TypeOf.Player);
     }
 
+    public void Play()
+    {
+        print("there");
+        LoadNextLevel();
+    }
+
     #endregion
 
     #region Private Helpers
@@ -98,6 +120,10 @@ public class GameController: MonoBehaviour
         {
             SceneManager.LoadScene(nextIndex);
         }
+        else
+        {
+            SceneManager.LoadScene(0);
+        }
     }
 
     private void ReloadCurrentLevel()
@@ -122,6 +148,7 @@ public class GameController: MonoBehaviour
 
     private void CheckScore()
     {
+        if (_isSplash) { return; }
         if (_playerScore == 20)
         {
             centerLabel.text = "Win!";
