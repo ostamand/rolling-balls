@@ -37,7 +37,7 @@ public class TargetHandler : MonoBehaviour {
     {
         float distanceToTarget = Vector3.Distance(from, this.transform.position);
         // reached target
-        if (!_moving && distanceToTarget < 1.2f)
+        if (!_moving && distanceToTarget < 1.3f)
         {
             _game.Hit(update);
             NewPosition(update);
@@ -58,7 +58,7 @@ public class TargetHandler : MonoBehaviour {
     {
         // move the target to a new spot
         this.transform.position = new Vector3(Random.value * 8 - 4,
-                                      0.5f,
+                                      0.0f,
                                       Random.value * 8 - 4);
         _moving = false;
         _collider.enabled = true;

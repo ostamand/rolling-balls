@@ -15,7 +15,7 @@ namespace Assets.Scripts.Common
         public static bool CheckFellOff(Vector3 position)
         {
             bool off = false;
-            if (position.y < -1.0f || position.y > 1.0f)
+            if (position.y < -1.0f || position.y > 1.0f || Mathf.Abs(position.x) > 6.0f || Mathf.Abs(position.z) > 6.0f)
             {
                 off = true;
             }

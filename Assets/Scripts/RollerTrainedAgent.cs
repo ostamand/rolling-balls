@@ -41,7 +41,7 @@ public class RollerTrainedAgent : Agent
 
     private void ResetPosition()
     {
-        this.transform.position = new Vector3(0, 0, 0);
+        this.transform.position = new Vector3(0, 0.5f, 0);
         this._rigidBody.angularVelocity = Vector3.zero;
         this._rigidBody.velocity = Vector3.zero;
     }

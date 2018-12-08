@@ -96,17 +96,22 @@ public class GameController: MonoBehaviour
         int nextIndex = SceneManager.GetActiveScene().buildIndex + 1;
         if (nextIndex != SceneManager.sceneCountInBuildSettings)
         {
-            _playerScore = 0;
-            _agentScore = 0;
             SceneManager.LoadScene(nextIndex);
         }
     }
 
     private void ReloadCurrentLevel()
     {
+        int current = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(current);
+    }
 
-
-
+    private void LoadLevel(int index)
+    {
+        if (index != SceneManager.sceneCountInBuildSettings)
+        {
+            SceneManager.LoadScene(index);
+        }
     }
 
     private void StartTransition()

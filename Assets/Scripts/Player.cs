@@ -58,7 +58,7 @@ public class Player : MonoBehaviour {
 
     private void ResetPosition()
     {
-        this.transform.position = new Vector3(0, 0, 0);
+        this.transform.position = new Vector3(-2f, 0.5f, -2f);
         this._rigidBody.angularVelocity = Vector3.zero;
         this._rigidBody.velocity = Vector3.zero;
     }
