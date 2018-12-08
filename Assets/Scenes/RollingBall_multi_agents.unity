@@ -44,7 +44,7 @@ RenderSettings:
 LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 11
-  m_GIWorkflowMode: 0
+  m_GIWorkflowMode: 1
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -89,7 +89,8 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaIndirect: 2
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ShowResolutionOverlay: 1
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000002, guid: 84d920106f0da844f93f5906269da077,
+    type: 2}
   m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
@@ -156,7 +157,7 @@ Prefab:
         type: 2}
       propertyPath: brain
       value: 
-      objectReference: {fileID: 1132680386}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7faf981c4200f1446aa7652d4ed65d7e, type: 2}
   m_IsPrefabParent: 0
@@ -187,7 +188,7 @@ MonoBehaviour:
     value: -1
   axisContinuousPlayerActions: []
   discretePlayerActions: []
-  brain: {fileID: 1132680386}
+  brain: {fileID: 0}
 --- !u!1 &282840810
 GameObject:
   m_ObjectHideFlags: 0
@@ -259,7 +260,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 71.30701, y: 0, z: 0}
 --- !u!1001 &291718182
 Prefab:
@@ -308,7 +309,7 @@ Prefab:
         type: 2}
       propertyPath: brain
       value: 
-      objectReference: {fileID: 1132680386}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7faf981c4200f1446aa7652d4ed65d7e, type: 2}
   m_IsPrefabParent: 0
@@ -334,7 +335,7 @@ MonoBehaviour:
   VisualObservationPlaceholderName: []
   ActionPlaceholderName: action
   PreviousActionPlaceholderName: prev_action
-  brain: {fileID: 1132680386}
+  brain: {fileID: 0}
 --- !u!1001 &633145117
 Prefab:
   m_ObjectHideFlags: 0
@@ -382,7 +383,7 @@ Prefab:
         type: 2}
       propertyPath: brain
       value: 
-      objectReference: {fileID: 1132680386}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7faf981c4200f1446aa7652d4ed65d7e, type: 2}
   m_IsPrefabParent: 0
@@ -433,7 +434,7 @@ Prefab:
         type: 2}
       propertyPath: brain
       value: 
-      objectReference: {fileID: 1132680386}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7faf981c4200f1446aa7652d4ed65d7e, type: 2}
   m_IsPrefabParent: 0
@@ -484,7 +485,7 @@ Prefab:
         type: 2}
       propertyPath: brain
       value: 
-      objectReference: {fileID: 1132680386}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7faf981c4200f1446aa7652d4ed65d7e, type: 2}
   m_IsPrefabParent: 0
@@ -501,12 +502,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   broadcast: 1
   brain: {fileID: 0}
---- !u!114 &1132680386 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114442511171291982, guid: ada796d158b49444baba1eb6aa419011,
-    type: 2}
-  m_PrefabInternal: {fileID: 1332861051}
-  m_Script: {fileID: 11500000, guid: c676a8ddf5a5f4f64b35e9ed5028679d, type: 3}
 --- !u!1001 &1226451581
 Prefab:
   m_ObjectHideFlags: 0
@@ -554,7 +549,7 @@ Prefab:
         type: 2}
       propertyPath: brain
       value: 
-      objectReference: {fileID: 1132680386}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7faf981c4200f1446aa7652d4ed65d7e, type: 2}
   m_IsPrefabParent: 0
@@ -605,7 +600,7 @@ Prefab:
         type: 2}
       propertyPath: brain
       value: 
-      objectReference: {fileID: 1132680386}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7faf981c4200f1446aa7652d4ed65d7e, type: 2}
   m_IsPrefabParent: 0
@@ -728,7 +723,7 @@ Prefab:
         type: 2}
       propertyPath: brain
       value: 
-      objectReference: {fileID: 1132680386}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7faf981c4200f1446aa7652d4ed65d7e, type: 2}
   m_IsPrefabParent: 0
@@ -743,7 +738,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35813a1be64e144f887d7d5f15b963fa, type: 3}
   m_Name: (Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)(Clone)
   m_EditorClassIdentifier: 
-  brain: {fileID: 1132680386}
+  brain: {fileID: 0}
 --- !u!1001 &1722789143
 Prefab:
   m_ObjectHideFlags: 0
@@ -791,7 +786,7 @@ Prefab:
         type: 2}
       propertyPath: brain
       value: 
-      objectReference: {fileID: 1132680386}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7faf981c4200f1446aa7652d4ed65d7e, type: 2}
   m_IsPrefabParent: 0
@@ -858,7 +853,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1001 &1918713958
 Prefab:
@@ -907,7 +902,7 @@ Prefab:
         type: 2}
       propertyPath: brain
       value: 
-      objectReference: {fileID: 1132680386}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7faf981c4200f1446aa7652d4ed65d7e, type: 2}
   m_IsPrefabParent: 0
@@ -958,7 +953,7 @@ Prefab:
         type: 2}
       propertyPath: brain
       value: 
-      objectReference: {fileID: 1132680386}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7faf981c4200f1446aa7652d4ed65d7e, type: 2}
   m_IsPrefabParent: 0
@@ -1009,7 +1004,7 @@ Prefab:
         type: 2}
       propertyPath: brain
       value: 
-      objectReference: {fileID: 1132680386}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7faf981c4200f1446aa7652d4ed65d7e, type: 2}
   m_IsPrefabParent: 0
