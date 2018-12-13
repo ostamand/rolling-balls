@@ -8,6 +8,11 @@ using UnityEngine.SceneManagement;
 
 public class GameController: MonoBehaviour
 {
+
+    // TODO add back & quit button for android
+    // TODO add sounds
+    // TODO change graphics
+
     #region Public Fields
 
     public Text playerScoreLabel;
@@ -31,7 +36,6 @@ public class GameController: MonoBehaviour
 
     void Start ()
     {
-        // start deactivated
         int sceneIndex = SceneManager.GetActiveScene().buildIndex;
         if (sceneIndex == 0) { _isSplash = true; }
 
@@ -40,23 +44,42 @@ public class GameController: MonoBehaviour
 
         if (!_isSplash)
         {
-            centerLabel.text = "Level " + (SceneManager.GetActiveScene().buildIndex);
-            _player = FindObjectOfType<Player>();
-            _player.SetActive(false);
-            Invoke("Activate", 1f);
+            SetLeveUI();
         }
         else
         {
-            centerLabel.text = "Rolling Balls of Christmas";
-            playerScoreLabel.enabled = false;
-            agentScoreLabel.enabled = false;
-            _agent.SetActive(true);
+            SetSplashUI();
         }
-        
+
         centerLabel.enabled = true;
     }
-	
-	void Update ()
+
+    private void SetLeveUI()
+    {
+        // set button display off
+        Button button = GetComponentInChildren<Button>();
+        button.gameObject.SetActive(false);
+
+        // set center label text
+        centerLabel.text = "Level " + (SceneManager.GetActiveScene().buildIndex);
+
+        // set player off 
+        _player = FindObjectOfType<Player>();
+        _player.SetActive(false);
+
+        Invoke("Activate", 1f);
+    }
+
+    private void SetSplashUI()
+    {
+        centerLabel.text = "Rolling Balls of Christmas";
+        playerScoreLabel.enabled = false;
+        agentScoreLabel.enabled = false;
+
+        _agent.SetActive(true);
+    }
+
+    void Update ()
     {
         ProcessInput();
 	}
