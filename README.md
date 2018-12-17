@@ -13,7 +13,7 @@ The rules are simple. Both the player (in green) and the opponent (in red) contr
 - To play the game navigate to the [Download](#download) section. Available for Windows and Android.
 - To watch me play a game follow this [youtube link](https://youtu.be/OQNvxL2XfUI).
 - To learn more on how the opponent was trained using reinforcement learning follow this [link](https://ostamand.github.io/rl/2018/12/08/unity-ai.html) to my blog. 
-- To train your own agent using the provided training environement with 12 parallel agents use these [steps].(#installation)
+- To train your own agent using the provided training environement with 12 parallel agents use these [steps](#installation)
 
 
 ## Download
