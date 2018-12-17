@@ -18,7 +18,9 @@ public class GameController: MonoBehaviour
     public Text playerScoreLabel;
     public Text agentScoreLabel;
     public Text centerLabel;
-
+    public Image imageSplash;
+    public Image imageScore;
+       
     public int pointsPerHit = 1;
     public int pointsPerFell = 1;
 
@@ -29,7 +31,7 @@ public class GameController: MonoBehaviour
     private int _playerScore = 0;
     private int _agentScore = 0;
     private Player _player;
-    private RollerTrainedAgent _agent;
+    private RollerTrainedAgent agent;
     private bool _isSplash;
 
     #endregion
@@ -39,9 +41,7 @@ public class GameController: MonoBehaviour
         int sceneIndex = SceneManager.GetActiveScene().buildIndex;
         if (sceneIndex == 0) { _isSplash = true; }
 
-        _agent = FindObjectOfType<RollerTrainedAgent>();
-        _agent.SetActive(false);
-
+        agent = FindObjectOfType<RollerTrainedAgent>();
         if (!_isSplash)
         {
             SetLeveUI();
@@ -50,12 +50,16 @@ public class GameController: MonoBehaviour
         {
             SetSplashUI();
         }
-
-        centerLabel.enabled = true;
     }
 
     private void SetLeveUI()
     {
+        int zero = 0;
+        imageSplash.enabled = false;
+        imageScore.enabled = true;
+        playerScoreLabel.text = zero.ToString();
+        agentScoreLabel.text = zero.ToString();
+
         // set button display off
         Button button = GetComponentInChildren<Button>();
         button.gameObject.SetActive(false);
@@ -72,11 +76,11 @@ public class GameController: MonoBehaviour
 
     private void SetSplashUI()
     {
-        centerLabel.text = "Rolling Balls of Christmas";
+        imageScore.enabled = false;
+        imageSplash.enabled = true;
         playerScoreLabel.enabled = false;
         agentScoreLabel.enabled = false;
-
-        _agent.SetActive(true);
+        centerLabel.enabled = false;
     }
 
     void Update ()
@@ -125,7 +129,7 @@ public class GameController: MonoBehaviour
     {
         centerLabel.enabled = false;
         _player.SetActive(true);
-        _agent.SetActive(true);
+        agent.SetActive(true);
     }
 
     private void ProcessInput()
