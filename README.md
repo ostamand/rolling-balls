@@ -8,9 +8,13 @@ Rolling Balls of Christmas is a fast-paced game where you get to play against an
 
 The rules are simple. Both the player and the opponent control a ball sitting on a square platform while a gift (the target) is also located on it. Each time either the player or the opponent reaches the gift it gets one point. Inversely, each time a ball falls off the platform the respective opponent gets one point. The first one to get to 20 points wins the game. 
 
+![logo](/doc/gameplay.png)
+
 - To play the game navigate to the [Download](#download) section. Available for Windows and Android.
+- To watch me play a game follow this [youtube link](https://youtu.be/OQNvxL2XfUI)
 - To learn more on how the opponent was trained using reinforcement learning follow this [link](https://ostamand.github.io/rl/2018/12/08/unity-ai.html) to my blog. 
-- To train your own agent using the provided training environement with 12 parallel agents use these [steps](#installation)
+- To train your own agent using the provided training environement with 12 parallel agents use these [steps].(#installation)
+
 
 ## Download
 
